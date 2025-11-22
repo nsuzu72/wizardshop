@@ -1,0 +1,142 @@
+/* Import Fonts */
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Zain&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+:root {
+  --primary: #0033a9;
+  --accent: #fedb00;
+  --white: #ffffff;
+
+  --title-font: 'VT323', monospace;
+  --main-font: 'Zain', sans-serif;
+}
+
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--main-font);
+  background-color: var(--white);
+  color: var(--primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Page Container */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 2rem 0;
+}
+
+/* Title Styling */
+.title {
+  font-family: var(--title-font);
+  font-size: 3rem;
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 1rem;
+  letter-spacing: 2px;
+}
+
+/* Product Grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.product-card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 2px solid var(--primary);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0, 51, 169, 0.15);
+}
+
+.product-image {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.product-title {
+  font-family: var(--title-font);
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.product-price {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.product-description {
+  font-size: 1rem;
+  opacity: 0.8;
+  margin-bottom: 1rem;
+}
+
+/* Buttons */
+.button {
+  display: inline-block;
+  background: var(--primary);
+  color: var(--white);
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.2s ease;
+}
+
+.button:hover {
+  background: var(--accent);
+  color: var(--primary);
+}
+
+/* Header / Nav */
+header {
+  background: var(--primary);
+  padding: 1rem 0;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+nav a {
+  color: var(--white);
+  text-decoration: none;
+  font-family: var(--title-font);
+  font-size: 1.4rem;
+  transition: opacity 0.2s ease;
+}
+
+nav a:hover {
+  opacity: 0.7;
+}
+
+/* Footer */
+footer {
+  margin-top: 3rem;
+  padding: 2rem 0;
+  text-align: center;
+  background: var(--primary);
+  color: var(--white);
+  font-family: var(--main-font);
+}
