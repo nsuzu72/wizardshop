@@ -6,6 +6,7 @@
   --primary: #0033a9;
   --accent: #fedb00;
   --white: #ffffff;
+  --black: #000000;
 
   --title-font: 'VT323', monospace;
   --main-font: 'Zain', sans-serif;
@@ -80,7 +81,7 @@ body {
 .product-price {
   font-size: 1.4rem;
   font-weight: bold;
-  color: var(--accent);
+  color: var(--black);
   margin-bottom: 1rem;
 }
 
