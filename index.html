@@ -5,6 +5,7 @@
   <title>Wizards Swim - Fundraising</title>
   <link rel="icon" type="image/png" href="https://i.ibb.co/3Yj1MF6d/OURFAVICON.png">
   <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
 </head>
 <body>
   <header>
@@ -24,7 +25,7 @@
         <h2 class="product-title">Full Sour Wholes</h2>
         <p class="product-price">$13.00</p>
         <p class="product-description">Classic NY-style full sours with big, bold vinegar bite and a crisp snap that only comes from a long soak in brine.</p>
-        <a href="#" class="button">Add to Cart</a>
+        <a href="#" class="button" onclick="addToCart('Full Sour Wholes', 13.00); return false;">Add to Cart</a>
       </div>
 
       <div class="product-card">
@@ -32,7 +33,7 @@
         <h2 class="product-title">Half Sour Wholes</h2>
         <p class="product-price">$13.00</p>
         <p class="product-description">Bright, fresh, and lightly brined with garlic and spices—our Half Sours deliver crisp crunch and a clean, cool taste.</p>
-        <a href="#" class="button">Add to Cart</a>
+        <a href="#" class="button" onclick="addToCart('Half Sour Wholes', 13.00); return false;">Add to Cart</a>
       </div>
 
       <div class="product-card">
@@ -40,7 +41,7 @@
         <h2 class="product-title">Garlic Kosher Dill Spears</h2>
         <p class="product-price">$13.00</p>
         <p class="product-description">Crunchy dill spears packed with garlic and spice—a classic deli flavor that hits all the right notes.</p>
-        <a href="#" class="button">Add to Cart</a>
+        <a href="#" class="button" onclick="addToCart('Garlic Kosher Dill Spears', 13.00); return false;">Add to Cart</a>
       </div>
 
       <div class="product-card">
@@ -48,7 +49,7 @@
         <h2 class="product-title">Garlic Kosher Dill Wholes</h2>
         <p class="product-price">$13.00</p>
         <p class="product-description">Whole crunchy dills bursting with garlic, dill, and spice for a perfect old-school pickle flavor.</p>
-        <a href="#" class="button">Add to Cart</a>
+        <a href="#" class="button" onclick="addToCart('Garlic Kosher Dill Wholes', 13.00); return false;">Add to Cart</a>
       </div>
 
       <div class="product-card">
@@ -56,7 +57,7 @@
         <h2 class="product-title">Garlic Kosher Dill Chips</h2>
         <p class="product-price">$13.00</p>
         <p class="product-description">Crisp dill chips with bold garlic flavor—ideal for burgers, sandwiches, or snacking straight from the jar.</p>
-        <a href="#" class="button">Add to Cart</a>
+        <a href="#" class="button" onclick="addToCart('Garlic Kosher Dill Chips', 13.00); return false;">Add to Cart</a>
       </div>
 
       <div class="product-card">
@@ -64,7 +65,7 @@
         <h2 class="product-title">Horseradish Spears</h2>
         <p class="product-price">$13.00</p>
         <p class="product-description">Freshly shaved horseradish brings heat and bite to these crisp, sugar-free spears.</p>
-        <a href="#" class="button">Add to Cart</a>
+        <a href="#" class="button" onclick="addToCart('Horseradish Spears', 13.00); return false;">Add to Cart</a>
       </div>
 
       <div class="product-card">
@@ -72,7 +73,7 @@
         <h2 class="product-title">Sweet Horseradish Chips</h2>
         <p class="product-price">$13.00</p>
         <p class="product-description">Sweet, crunchy chips with a smooth horseradish kick—a unique mix of sweet and heat.</p>
-        <a href="#" class="button">Add to Cart</a>
+        <a href="#" class="button" onclick="addToCart('Sweet Horseradish Chips', 13.00); return false;">Add to Cart</a>
       </div>
 
       <div class="product-card">
@@ -80,7 +81,7 @@
         <h2 class="product-title">Hot & Spicy</h2>
         <p class="product-price">$13.00</p>
         <p class="product-description">Chili-cured pickles with real heat and a bold, zesty flavor that lights up every bite.</p>
-        <a href="#" class="button">Add to Cart</a>
+        <a href="#" class="button" onclick="addToCart('Hot & Spicy', 13.00); return false;">Add to Cart</a>
       </div>
 
       <div class="product-card">
@@ -88,7 +89,7 @@
         <h2 class="product-title">Sweet Bread & Butter Chips</h2>
         <p class="product-price">$13.00</p>
         <p class="product-description">A sweet, nostalgic classic—crisp chips with warm spice, perfect for sandwiches or snacking.</p>
-        <a href="#" class="button">Add to Cart</a>
+        <a href="#" class="button" onclick="addToCart('Sweet Bread & Butter Chips', 13.00); return false;">Add to Cart</a>
       </div>
 
       <div class="product-card">
@@ -96,7 +97,7 @@
         <h2 class="product-title">Sweet & Spicy Chips</h2>
         <p class="product-price">$13.00</p>
         <p class="product-description">Sweet meets heat in these crunchy chips, blending chili pepper kick with smooth sweetness.</p>
-        <a href="#" class="button">Add to Cart</a>
+        <a href="#" class="button" onclick="addToCart('Sweet & Spicy Chips', 13.00); return false;">Add to Cart</a>
       </div>
 
       <div class="product-card">
@@ -104,7 +105,7 @@
         <h2 class="product-title">Pickle Green Tomatoes</h2>
         <p class="product-price">$13.00</p>
         <p class="product-description">Crisp, tangy green tomatoes seasoned with garlic and spices—a deli favorite with a bold bite.</p>
-        <a href="#" class="button">Add to Cart</a>
+        <a href="#" class="button" onclick="addToCart('Pickle Green Tomatoes', 13.00); return false;">Add to Cart</a>
       </div>
 
       <div class="product-card">
@@ -112,7 +113,7 @@
         <h2 class="product-title">Fresh Sauerkraut</h2>
         <p class="product-price">$13.00</p>
         <p class="product-description">Fresh, naturally brined kraut with clean crunch and tang—perfect for dogs, sandwiches, and BBQ.</p>
-        <a href="#" class="button">Add to Cart</a>
+        <a href="#" class="button" onclick="addToCart('Fresh Sauerkraut', 13.00); return false;">Add to Cart</a>
       </div>
 
       <div class="product-card">
@@ -120,7 +121,7 @@
         <h2 class="product-title">Kosher Dill Sandwich Slices</h2>
         <p class="product-price">$13.00</p>
         <p class="product-description">Thin-cut dill slices loaded with garlic and spice—the perfect crunchy layer for any sandwich.</p>
-        <a href="#" class="button">Add to Cart</a>
+        <a href="#" class="button" onclick="addToCart('Kosher Dill Sandwich Slices', 13.00); return false;">Add to Cart</a>
       </div>
 
       <div class="product-card">
@@ -128,7 +129,7 @@
         <h2 class="product-title">Marinated Mushrooms</h2>
         <p class="product-price">$13.00</p>
         <p class="product-description">Tender mushrooms soaked in a savory, garlicky marinade with herbs and a light tang.</p>
-        <a href="#" class="button">Add to Cart</a>
+        <a href="#" class="button" onclick="addToCart('Marinated Mushrooms', 13.00); return false;">Add to Cart</a>
       </div>
 
       <div class="product-card">
@@ -136,15 +137,15 @@
         <h2 class="product-title">Gherkin Stuffed Olives</h2>
         <p class="product-price">$13.00</p>
         <p class="product-description">Juicy green olives packed with crunchy gherkin centers—salty, crisp, and addictive.</p>
-        <a href="#" class="button">Add to Cart</a>
+        <a href="#" class="button" onclick="addToCart('Gherkin Stuffed Olives', 13.00); return false;">Add to Cart</a>
       </div>
 
       <div class="product-card">
         <img class="product-image" src="https://i.ibb.co/1GqfZZ6V/Blue-Cheese-Olives-removebg-preview.png" alt="Product Image" />
-        <h2 class="product-title">Blue Cheese Olives</h2>
+        <h2 class="product-title">Bleu Cheese Olives</h2>
         <p class="product-price">$13.00</p>
         <p class="product-description">Rich, creamy blue cheese inside firm green olives for a bold, savory bite.</p>
-        <a href="#" class="button">Add to Cart</a>
+        <a href="#" class="button" onclick="addToCart('Bleu Cheese Olives', 13.00); return false;">Add to Cart</a>
       </div>
 
       <div class="product-card">
@@ -152,7 +153,7 @@
         <h2 class="product-title">Dilled Green Beans</h2>
         <p class="product-price">$13.00</p>
         <p class="product-description">Crisp green beans brined with dill and garlic—perfect for snacking or cocktails.</p>
-        <a href="#" class="button">Add to Cart</a>
+        <a href="#" class="button" onclick="addToCart('Dilled Green Beans', 13.00); return false;">Add to Cart</a>
       </div>
 
       <div class="product-card">
@@ -160,7 +161,7 @@
         <h2 class="product-title">Pickled Beets</h2>
         <p class="product-price">$13.00</p>
         <p class="product-description">Tender, deep-red beets in a sweet-tangy brine—earthy, vibrant, and delicious.</p>
-        <a href="#" class="button">Add to Cart</a>
+        <a href="#" class="button" onclick="addToCart('Pickled Beets', 13.00); return false;">Add to Cart</a>
       </div>
 
       <div class="product-card">
@@ -168,7 +169,7 @@
         <h2 class="product-title">Pickled Asparagus</h2>
         <p class="product-price">$13.00</p>
         <p class="product-description">Crisp asparagus spears pickled with garlic and spice—a gourmet snack or garnish.</p>
-        <a href="#" class="button">Add to Cart</a>
+        <a href="#" class="button" onclick="addToCart('Pickled Asparagus', 13.00); return false;">Add to Cart</a>
       </div>
 
       <div class="product-card">
@@ -176,7 +177,7 @@
         <h2 class="product-title">Pickled Carrots</h2>
         <p class="product-price">$13.00</p>
         <p class="product-description">Crunchy carrot sticks with a bright, tangy brine and a hint of spice.</p>
-        <a href="#" class="button">Add to Cart</a>
+        <a href="#" class="button" onclick="addToCart('Pickled Carrots', 13.00); return false;">Add to Cart</a>
       </div>
     </div>
   </div>
