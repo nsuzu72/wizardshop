@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wizards Swim - Your Cart</title>
+    <link rel="icon" type="image/png" href="https://i.ibb.co/3Yj1MF6d/OURFAVICON.png">
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script> 
+    <script src="cart-display.js" defer></script> 
+    <style>
+        /* Simple table styling for the cart */
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+        }
+        .cart-table th, .cart-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        .cart-table th {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+        .cart-total {
+            text-align: right;
+            font-size: 1.5rem;
+            margin-top: 1rem;
+            font-family: var(--title-font);
+        }
+        .checkout-actions {
+            margin-top: 2rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="cart.html" id="cart-link">View Cart</a> 
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1 class="title">Your Order Cart</h1>
+        
+        <div id="cart-contents">
+            <p>Your cart is empty.</p>
+        </div>
+
+        <div class="checkout-actions">
+            <a href="checkout.html" id="checkout-button" class="button" style="display:none;">Proceed to Checkout</a>
+            <a href="index.html" class="button" style="background: grey;">Continue Shopping</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>Thank you for supporting the Wizards Swim Team!</p>
+    </footer>
+</body>
+</html>
