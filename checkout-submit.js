@@ -32,6 +32,18 @@ for (const name in cart) {
     });
 }
 
+
+
+// Format order summary as simple text
+let orderSummary = [];
+let totalQuantity = 0;
+
+for (const name in cart) {
+    const item = cart[name];
+    orderSummary.push(`${item.quantity}x ${name} - $${item.total.toFixed(2)}`);
+    totalQuantity += item.quantity;
+}
+
 const formData = {
     name: document.getElementById('name').value,
     email: document.getElementById('email').value,
@@ -39,9 +51,8 @@ const formData = {
     address: document.getElementById('address').value,
     timestamp: new Date().toLocaleString(),
     total: total,
-    order: orderArray.map(item => item.name),
-    quantity: orderArray.map(item => item.quantity),
-    itemTotal: orderArray.map(item => item.itemTotal)
+    order_summary: orderSummary.join('\n'), // Convert array to text
+    total_quantity: totalQuantity
 };
     
 console.log("FORM DATA SENT TO EMAILJS:", formData);
