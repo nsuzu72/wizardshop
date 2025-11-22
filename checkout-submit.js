@@ -32,14 +32,18 @@ async function handleFormSubmit(e) {
     }
 
   // Gather customer data from the form
+// Gather customer data from the form
 const formData = {
-    name: document.getElementById('name').value,
-    email: document.getElementById('email').value,
-    phone: document.getElementById('phone').value,
-    address: document.getElementById('address').value,
-    timestamp: new Date().toLocaleString(),
-    total: total,
-    order_json: orderArray
+  name: document.getElementById('name').value,
+  email: document.getElementById('email').value,
+  phone: document.getElementById('phone').value,
+  address: document.getElementById('address').value,
+  timestamp: new Date().toLocaleString(),
+  total: total,
+
+  // Send both formats while we debug:
+  order_json: orderArray,                 // preferred for looping in template
+  order_string: JSON.stringify(orderArray) // safe fallback to view raw JSON
 };
 
 console.log("FORM DATA SENT TO EMAILJS:", formData);
