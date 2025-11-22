@@ -39,7 +39,7 @@ const formData = {
     address: document.getElementById('address').value,
     timestamp: new Date().toLocaleString(),
     total: total,
-    order: orderArray
+    order: JSON.stringify(orderArray)
 };
 
 console.log("FORM DATA SENT TO EMAILJS:", formData);
