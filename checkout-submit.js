@@ -19,31 +19,27 @@ async function handleFormSubmit(e) {
     const total = localStorage.getItem('cart_total') || '0.00';
 
     
-    // Format the order array for the EmailJS loop
-    let orderArray = [];
-    for (const name in cart) {
-        const item = cart[name];
-        orderArray.push({
-            name: name,
-            quantity: item.quantity,
-            itemTotal: item.total.toFixed(2),
-            isTip: item.isTip
-        });
-    }
+// Format the order array for the EmailJS loop
+let orderArray = [];
+for (const name in cart) {
+    const item = cart[name];
+    orderArray.push({
+        name: name,
+        quantity: item.quantity,
+        itemTotal: item.total.toFixed(2),
+        isTip: item.isTip
+    });
+}
 
-  // Gather customer data from the form
 // Gather customer data from the form
 const formData = {
-  name: document.getElementById('name').value,
-  email: document.getElementById('email').value,
-  phone: document.getElementById('phone').value,
-  address: document.getElementById('address').value,
-  timestamp: new Date().toLocaleString(),
-  total: total,
-
-  // Send both formats while we debug:
-  order_json: orderArray,                 // preferred for looping in template
-  order_string: JSON.stringify(orderArray) // safe fallback to view raw JSON
+    name: document.getElementById('name').value,
+    email: document.getElementById('email').value,
+    phone: document.getElementById('phone').value,
+    address: document.getElementById('address').value,
+    timestamp: new Date().toLocaleString(),
+    total: total,
+    order_json: orderArray // CHANGED FROM 'order' TO 'order_json'
 };
 
 console.log("FORM DATA SENT TO EMAILJS:", formData);
