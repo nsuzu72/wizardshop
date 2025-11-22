@@ -17,6 +17,10 @@ async function handleFormSubmit(e) {
 
     const cart = getCart(); // From script.js
     const total = localStorage.getItem('cart_total') || '0.00';
+
+    console.log("FORM DATA SENT TO EMAILJS:", formData);
+    alert(JSON.stringify(formData));
+
     
     // Format the order array for the EmailJS loop
     let orderArray = [];
