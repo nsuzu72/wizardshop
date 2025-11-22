@@ -32,7 +32,6 @@ for (const name in cart) {
     });
 }
 
-// Gather customer data from the form
 const formData = {
     name: document.getElementById('name').value,
     email: document.getElementById('email').value,
@@ -40,7 +39,9 @@ const formData = {
     address: document.getElementById('address').value,
     timestamp: new Date().toLocaleString(),
     total: total,
-    order_json: orderArray // Changed to match template
+    order: orderArray.map(item => item.name),
+    quantity: orderArray.map(item => item.quantity),
+    itemTotal: orderArray.map(item => item.itemTotal)
 };
     
 console.log("FORM DATA SENT TO EMAILJS:", formData);
