@@ -53,24 +53,21 @@ alert(JSON.stringify(formData));
     const serviceID = 'service_zhe8omo'; 
     const templateID = 'template_p3spbeq'; 
 
-    try {
-        await emailjs.send(serviceID, templateID, formData);
+emailjs.send(serviceID, templateID, formData)
+  .then((resp) => {
+    console.log('Email sent OK:', resp);
+    formMessage.textContent = 'Order successfully submitted! Please complete your payment using the instructions above.';
+    formMessage.style.color = 'green';
+    // clear cart etc...
+  })
+  .catch((err) => {
+    console.error('Email submission failed (full object):', err);
+    // EmailJS error may be in err.text or err.status or err.message
+    console.error('err.text:', err && err.text);
+    console.error('err.status:', err && err.status);
+    alert('EmailJS error: ' + (err && (err.text || err.message || JSON.stringify(err))));
+    formMessage.textContent = 'Order submission failed. See console for details.';
+    formMessage.style.color = 'red';
+  });
 
-        formMessage.textContent = 'Order successfully submitted! Please complete your payment using the instructions above.';
-        formMessage.style.color = 'green';
-        
-        // Clear the cart upon successful submission
-        localStorage.removeItem(CART_STORAGE_KEY);
-        localStorage.removeItem('cart_total');
-        updateCartCount(); // Update the header
-        
-        // Disable the form
-        document.getElementById('checkout-form').reset();
-        document.getElementById('checkout-form').style.display = 'none';
-
-    } catch (error) {
-        console.error('Email submission failed:', error);
-        formMessage.textContent = 'Order submission failed. Please try again or contact the organizer.';
-        formMessage.style.color = 'red';
-    }
 }
