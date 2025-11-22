@@ -14,8 +14,8 @@
 
 /* Global Reset */
 * {
-  margin: 0;
-  padding: 0;
+  margin: 3;
+  padding: 1;
   box-sizing: border-box;
 }
 
