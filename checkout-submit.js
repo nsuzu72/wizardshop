@@ -43,7 +43,7 @@ async function handleFormSubmit(e) {
 
     // Replace these with your actual IDs from the EmailJS template setup!
     const serviceID = 'service_zhe8omo'; 
-    const templateID = 'template_h9kj0oq'; 
+    const templateID = 'template_p3spbeq'; 
 
     try {
         await emailjs.send(serviceID, templateID, formData);
