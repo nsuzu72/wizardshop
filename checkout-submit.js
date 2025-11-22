@@ -20,13 +20,14 @@ async function handleFormSubmit(e) {
 
     
 // Format the order array for the EmailJS loop
+// Format the order array for the EmailJS loop
 let orderArray = [];
 for (const name in cart) {
     const item = cart[name];
     orderArray.push({
         name: name,
         quantity: item.quantity,
-        itemTotal: item.total.toFixed(2),
+        itemTotal: parseFloat(item.total.toFixed(2)), // Keep as number, not string
         isTip: item.isTip
     });
 }
@@ -39,15 +40,27 @@ const formData = {
     address: document.getElementById('address').value,
     timestamp: new Date().toLocaleString(),
     total: total,
-    order_json: orderArray // CHANGED FROM 'order' TO 'order_json'
+    order_json: orderArray // Changed to match template
 };
-
+    
 console.log("FORM DATA SENT TO EMAILJS:", formData);
 alert(JSON.stringify(formData));
 
     // Replace these with your actual IDs from the EmailJS template setup!
     const serviceID = 'service_zhe8omo'; 
     const templateID = 'template_p3spbeq'; 
+
+    console.log('Sending formData:', JSON.stringify(formData, null, 2));
+
+// Check each item in orderArray
+orderArray.forEach((item, index) => {
+    console.log(`Item ${index}:`, {
+        name: typeof item.name,
+        quantity: typeof item.quantity,
+        itemTotal: typeof item.itemTotal,
+        isTip: typeof item.isTip
+    });
+});
 
 emailjs.send(serviceID, templateID, formData)
   .then((resp) => {
