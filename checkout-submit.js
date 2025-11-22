@@ -18,9 +18,6 @@ async function handleFormSubmit(e) {
     const cart = getCart(); // From script.js
     const total = localStorage.getItem('cart_total') || '0.00';
 
-    console.log("FORM DATA SENT TO EMAILJS:", formData);
-    alert(JSON.stringify(formData));
-
     
     // Format the order array for the EmailJS loop
     let orderArray = [];
@@ -34,16 +31,19 @@ async function handleFormSubmit(e) {
         });
     }
 
-    // Gather customer data from the form
-    const formData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        phone: document.getElementById('phone').value,
-        address: document.getElementById('address').value,
-        timestamp: new Date().toLocaleString(),
-        total: total,
-        order: orderArray // The object for the #each loop
-    };
+  // Gather customer data from the form
+const formData = {
+    name: document.getElementById('name').value,
+    email: document.getElementById('email').value,
+    phone: document.getElementById('phone').value,
+    address: document.getElementById('address').value,
+    timestamp: new Date().toLocaleString(),
+    total: total,
+    order: orderArray
+};
+
+console.log("FORM DATA SENT TO EMAILJS:", formData);
+alert(JSON.stringify(formData));
 
     // Replace these with your actual IDs from the EmailJS template setup!
     const serviceID = 'service_zhe8omo'; 
