@@ -57,10 +57,40 @@ body {
 /* Product Grid */
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(4, minmax(200px, 1fr));
+  gap: 1.5rem;
   margin-top: 2rem;
 }
+
+/* Slightly larger cards on very wide screens */
+@media (min-width: 1400px) {
+  .product-grid {
+    grid-template-columns: repeat(4, minmax(220px, 1fr));
+  }
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .title {
+    font-size: 2.2rem;
+  }
+
+  .product-card {
+    padding: 1rem;
+  }
+}
+
 
 .product-card {
   background: var(--white);
