@@ -1,102 +1,100 @@
-// --- checkout-submit.js ---
+// --- checkout-submit.js (UPDATED) ---
 
 document.addEventListener('DOMContentLoaded', () => {
     const total = localStorage.getItem('cart_total') || '0.00';
-    document.getElementById('total-display').textContent = `Grand Total Due: $${total}`;
+    const totalDisplay = document.getElementById('total-display');
+    if (totalDisplay) totalDisplay.textContent = `Grand Total Due: $${total}`;
 
     const form = document.getElementById('checkout-form');
-    form.addEventListener('submit', handleFormSubmit);
+    if (form) form.addEventListener('submit', handleFormSubmit);
 });
 
 async function handleFormSubmit(e) {
     e.preventDefault();
 
+    const submitBtn = document.querySelector('#checkout-form button[type="submit"]');
     const formMessage = document.getElementById('form-message');
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending order...';
+    }
     formMessage.textContent = "Sending order...";
     formMessage.style.color = 'orange';
 
-    const cart = getCart(); // From script.js
+    const cart = getCart(); // from script.js
     const total = localStorage.getItem('cart_total') || '0.00';
 
-    
-// Format the order array for the EmailJS loop
-// Format the order array for the EmailJS loop
-let orderArray = [];
-for (const name in cart) {
-    const item = cart[name];
-    orderArray.push({
-        name: name,
-        quantity: item.quantity,
-        itemTotal: parseFloat(item.total.toFixed(2)), // Keep as number, not string
-        isTip: item.isTip
-    });
-}
-
-
-
-// Format order summary as simple text
-let orderSummary = [];
-let totalQuantity = 0;
-
-console.log('Cart contents:', cart); // Debug log
-
-for (const name in cart) {
-    const item = cart[name];
-    console.log('Processing item:', name, item); // Debug log
-    
-    if (item && typeof item.quantity !== 'undefined' && typeof item.total !== 'undefined') {
-        orderSummary.push(`${item.quantity}x ${name} - $${item.total.toFixed(2)}`);
-        totalQuantity += item.quantity;
+    // Build orderArray for any backend/template usage
+    let orderArray = [];
+    for (const name in cart) {
+        const item = cart[name];
+        orderArray.push({
+            name: name,
+            quantity: item.quantity,
+            itemTotal: parseFloat((item.total || (item.quantity * item.price)).toFixed(2)),
+            isTip: !!item.isTip
+        });
     }
-}
 
-console.log('Order Summary:', orderSummary); // Debug log
-console.log('Total Quantity:', totalQuantity); // Debug log
+    // Build a readable order summary
+    let orderSummary = [];
+    let totalQuantity = 0;
+    for (const name in cart) {
+        const item = cart[name];
+        if (item && typeof item.quantity !== 'undefined') {
+            const lineTotal = (item.total || (item.quantity * item.price));
+            orderSummary.push(`${item.quantity}x ${name} - $${lineTotal.toFixed(2)}`);
+            totalQuantity += item.quantity;
+        }
+    }
 
-const formData = {
-    name: document.getElementById('name').value,
-    email: document.getElementById('email').value,
-    phone: document.getElementById('phone').value,
-    address: document.getElementById('address').value,
-    timestamp: new Date().toLocaleString(),
-    total: total,
-    order_summary: orderSummary.join('\n'),
-    total_quantity: totalQuantity
-};
+    const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        address: document.getElementById('address').value,
+        timestamp: new Date().toLocaleString(),
+        total: total,
+        order_summary: orderSummary.join('\n'),
+        total_quantity: totalQuantity
+    };
 
-console.log('Final formData:', formData); // Debug log
+    // Store the final order locally so the payment page can read it
+    try {
+        localStorage.setItem('last_order', JSON.stringify(formData));
+    } catch (err) {
+        console.warn('Could not save last_order to localStorage', err);
+    }
 
-    // Replace these with your actual IDs from the EmailJS template setup!
-    const serviceID = 'service_zhe8omo'; 
-    const templateID = 'template_p3spbeq'; 
+    // EmailJS settings (replace with your real IDs if needed)
+    const serviceID = 'service_zhe8omo';
+    const templateID = 'template_p3spbeq';
 
-    console.log('Sending formData:', JSON.stringify(formData, null, 2));
+    // Attempt to send email
+    try {
+        const resp = await emailjs.send(serviceID, templateID, formData);
+        console.log('Email sent OK:', resp);
 
-// Check each item in orderArray
-orderArray.forEach((item, index) => {
-    console.log(`Item ${index}:`, {
-        name: typeof item.name,
-        quantity: typeof item.quantity,
-        itemTotal: typeof item.itemTotal,
-        isTip: typeof item.isTip
-    });
-});
+        // Clear the cart, remove the cart total, update UI
+        saveCart({}); // function from script.js
+        localStorage.removeItem('cart_total');
+        updateCartCount(); // update cart count in header
 
-emailjs.send(serviceID, templateID, formData)
-  .then((resp) => {
-    console.log('Email sent OK:', resp);
-    formMessage.textContent = 'Order successfully submitted! Please complete your payment using the instructions above.';
-    formMessage.style.color = 'green';
-    // clear cart etc...
-  })
-  .catch((err) => {
-    console.error('Email submission failed (full object):', err);
-    // EmailJS error may be in err.text or err.status or err.message
-    console.error('err.text:', err && err.text);
-    console.error('err.status:', err && err.status);
-    alert('EmailJS error: ' + (err && (err.text || err.message || JSON.stringify(err))));
-    formMessage.textContent = 'Order submission failed. See console for details.';
-    formMessage.style.color = 'red';
-  });
+        // Don't show the submit/purchase button on the final page
+        // Redirect to payment instructions page to complete payment
+        window.location.href = 'payment.html';
+    } catch (err) {
+        console.error('Email submission failed (full object):', err);
+        let displayErr = 'Order submission failed. See console for details.';
+        if (err && (err.text || err.message)) displayErr = err.text || err.message;
+        formMessage.textContent = displayErr;
+        formMessage.style.color = 'red';
 
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Submit Order & Get Payment Details';
+        }
+
+        // Keep last_order in localStorage so user can retry
+    }
 }
