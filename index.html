@@ -7,6 +7,36 @@
   <link rel="icon" type="image/png" href="https://i.ibb.co/3Yj1MF6d/OURFAVICON.png">
   <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
+  <style>
+    /* Additional styles for the search bar */
+    .search-container {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    
+    .search-bar {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      border: 2px solid #4a6741;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    
+    .search-bar:focus {
+      outline: none;
+      border-color: #3a5131;
+      box-shadow: 0 0 0 2px rgba(74, 103, 65, 0.2);
+    }
+    
+    .no-results {
+      text-align: center;
+      padding: 2rem;
+      font-style: italic;
+      color: #666;
+    }
+  </style>
 </head>
 
 <body>
@@ -20,16 +50,27 @@
   <div class="container">
 
     <!-- MAIN TITLE -->
-    <h1 class="title">Featured Products</h1>
+    <h1 class="title">Our Pickles</h1>
+
+    <!-- SEARCH BAR -->
+    <div class="search-container">
+      <input 
+        type="text" 
+        id="search-bar" 
+        class="search-bar" 
+        placeholder="Search for pickles, olives, and more..."
+        aria-label="Search products"
+      >
+    </div>
 
     <!-- DONATION / TIP SECTION (MOVED OUT OF GRID) -->
     <div class="donation-section" style="margin-top: 3rem; text-align:center;">
       <h2 class="title">Don't want pickles? Support the team directly!</h2>
 
       <div class="product-card" id="tip-card" style="max-width: 720px; margin: 2rem auto;">
-        <h2 class="product-title">Washingtonville Swim Team Donation</h2>
+        <h2 class="product-title">Donate to the Wizards</h2>
         <p class="product-description">
-          Your contribution goes directly to the team to help cover pool time and equipment costs.
+          Your contribution goes directly to the team to help cover pool and equipment costs.
           Thank you for your support!
         </p>
 
@@ -38,7 +79,7 @@
           <input
             type="number"
             id="tip-amount"
-            min="1"
+            min="5.00"
             value="5.00"
             step="5.00"
             style="width: 100px; padding: 0.5rem; border: 1px solid var(--primary); border-radius: 4px;"
@@ -49,7 +90,7 @@
     </div>
 
     <!-- PRODUCT GRID (CLEAN, FLAT, VALID) -->
-    <div class="product-grid">
+    <div class="product-grid" id="product-grid">
 
       <div class="product-card">
         <img class="product-image" src="https://i.ibb.co/twZTJcb1/Full-Sour-Wholes.png" alt="Full Sour Wholes" />
@@ -213,11 +254,50 @@
     </div>
   </div>
 
-
-
   <footer>
     <p>Thank you for supporting the Wizards Swim Team!</p>
   </footer>
 
+  <script>
+    // Search functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const searchBar = document.getElementById('search-bar');
+      const productGrid = document.getElementById('product-grid');
+      const productCards = productGrid.getElementsByClassName('product-card');
+      
+      searchBar.addEventListener('input', function() {
+        const searchTerm = searchBar.value.toLowerCase();
+        let hasVisibleProducts = false;
+        
+        // Loop through all product cards and show/hide based on search term
+        for (let i = 0; i < productCards.length; i++) {
+          const productTitle = productCards[i].getElementsByClassName('product-title')[0].textContent.toLowerCase();
+          const productDescription = productCards[i].getElementsByClassName('product-description')[0].textContent.toLowerCase();
+          
+          // Check if search term matches product title or description
+          if (productTitle.includes(searchTerm) || productDescription.includes(searchTerm)) {
+            productCards[i].style.display = '';
+            hasVisibleProducts = true;
+          } else {
+            productCards[i].style.display = 'none';
+          }
+        }
+        
+        // Show "no results" message if no products match
+        let noResultsMessage = document.getElementById('no-results-message');
+        if (!hasVisibleProducts && searchTerm !== '') {
+          if (!noResultsMessage) {
+            noResultsMessage = document.createElement('div');
+            noResultsMessage.id = 'no-results-message';
+            noResultsMessage.className = 'no-results';
+            noResultsMessage.textContent = 'No products found matching your search.';
+            productGrid.appendChild(noResultsMessage);
+          }
+        } else if (noResultsMessage) {
+          noResultsMessage.remove();
+        }
+      });
+    });
+  </script>
 </body>
 </html>
