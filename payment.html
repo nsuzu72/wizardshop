@@ -11,7 +11,11 @@
     .logo-row { display:flex; align-items:center; gap:1rem; margin-bottom:1rem; }
     .logo-row img { width:64px; height:64px; border-radius:8px; }
     #map-frame { width:100%; height:300px; border:0; margin-top: 1rem; }
-    .order-lines { white-space: pre-wrap; background: #f8f8f8; padding: 1rem; border-radius: 8px; margin-top: 1rem; }
+    .payment-buttons { display: flex; gap: 1rem; justify-content: center; margin: 1.5rem 0; }
+    .payment-button { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: inherit; }
+    .payment-button img { width: 80px; height: 80px; border-radius: 12px; transition: transform 0.2s; }
+    .payment-button:hover img { transform: scale(1.05); }
+    .payment-button span { margin-top: 0.5rem; font-weight: bold; }
   </style>
 </head>
 <body>
@@ -31,19 +35,28 @@
       </div>
     </div>
 
-    <h2>Order Summary</h2>
-    <div id="order-summary" class="order-lines">Loading...</div>
-
-    <h2 style="margin-top:1.5rem;">Payment Instructions</h2>
-    <p>
-      To complete your order, please send the Grand Total to one of these accounts:
+    <h2>Payment Instructions</h2>
+    <p style="text-align: center; font-size: 1.2rem; margin-bottom: 1.5rem;">
+      Pay Emily Brown through:
     </p>
-    <ul>
-      <li>Venmo: <a href="https://venmo.com/u/Emily-Brown-725" target="_blank" rel="noopener">Emily-Brown-725</a></li>
-      <li>PayPal: organizer@email.com</li>
-    </ul>
 
-    <p style="font-weight:bold;">After you pay, please take a screenshot of your payment and email it to the organizer address or reply to your confirmation email.</p>
+    <div class="payment-buttons">
+      <a href="https://www.paypal.com/qrcodes/managed/e6ebb8a3-7c8c-423a-8ff0-f1b6de7e1ad1?utm_source=consapp_download" 
+         class="payment-button" target="_blank" rel="noopener">
+        <img src="https://cdn-icons-png.flaticon.com/512/174/174861.png" alt="PayPal" />
+        <span>PayPal</span>
+      </a>
+      
+      <a href="https://venmo.com/code?user_id=2977870603354112269&created=1763868460.007678" 
+         class="payment-button" target="_blank" rel="noopener">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Venmo_logo.png" alt="Venmo" />
+        <span>Venmo</span>
+      </a>
+    </div>
+
+    <p style="font-weight:bold; text-align: center;">
+      After you pay, please take a screenshot of your payment and email it to the organizer address or reply to your confirmation email.
+    </p>
 
     <div id="address-box">
       <h3>Shipping Address</h3>
@@ -66,28 +79,12 @@
     (function () {
       const raw = localStorage.getItem('last_order');
       if (!raw) {
-        document.getElementById('order-summary').textContent = 'No order information found. If you completed an order but see nothing here, please contact the organizer.';
+        document.getElementById('shipping-address').textContent = 'No order information found. If you completed an order but see nothing here, please contact the organizer.';
         return;
       }
 
       let order = {};
       try { order = JSON.parse(raw); } catch (e) { console.error('parse error', e); }
-
-      // Render order summary
-      const orderSummaryLines = [];
-      orderSummaryLines.push(`Name: ${order.name || ''}`);
-      orderSummaryLines.push(`Email: ${order.email || ''}`);
-      orderSummaryLines.push(`Phone: ${order.phone || ''}`);
-      orderSummaryLines.push(`Total: $${order.total || '0.00'}`);
-      orderSummaryLines.push('');
-      orderSummaryLines.push('Items:');
-      if (order.order_summary && order.order_summary.length) {
-        orderSummaryLines.push(order.order_summary);
-      } else {
-        orderSummaryLines.push('(No detailed items captured)');
-      }
-
-      document.getElementById('order-summary').textContent = orderSummaryLines.join('\\n');
 
       // Shipping address block + google maps embed via query (no API key needed for basic embed)
       const address = order.address || '';
