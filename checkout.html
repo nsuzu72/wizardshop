@@ -98,23 +98,6 @@
     });
   }
 
-  // OPTIONAL: Google Places Autocomplete for Address input (requires an API key)
-  // If you want it, uncomment the script include below and replace YOUR_API_KEY.
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOZ5RXthhLfiasbyo_OYZM6FeqZy6RWzg&libraries=places&callback=initAutocomplete" async defer></script>
-  function initAutocomplete() {
-    const addr = document.getElementById('address');
-    if (!addr) return;
-    const autocomplete = new google.maps.places.Autocomplete(addr, { types: ['address'] });
-    autocomplete.setFields(['formatted_address']);
-    autocomplete.addListener('place_changed', () => {
-      const place = autocomplete.getPlace();
-      if (place && place.formatted_address) {
-        addr.value = place.formatted_address;
-      }
-    });
-  }
-</script>
-
             <button type="submit" class="button" style="width: 100%; font-size: 1.5rem; margin-bottom: 1rem;">
                 Submit Order & Get Payment Details
             </button>
