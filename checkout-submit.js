@@ -68,7 +68,7 @@ async function handleFormSubmit(e) {
 
     // EmailJS settings (replace with your real IDs if needed)
     const serviceID = 'service_zhe8omo';
-    const templateID = 'template_p3spbeq';
+    const templateID = 'template_h9kj0oq';
 
     // Attempt to send email
     try {
