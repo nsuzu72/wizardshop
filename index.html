@@ -7,36 +7,7 @@
   <link rel="icon" type="image/png" href="https://i.ibb.co/3Yj1MF6d/OURFAVICON.png">
   <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
-  <style>
-    /* Additional styles for the search bar */
-    .search-container {
-      max-width: 600px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-    
-    .search-bar {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      font-size: 1rem;
-      border: 2px solid #4a6741;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-    
-    .search-bar:focus {
-      outline: none;
-      border-color: #3a5131;
-      box-shadow: 0 0 0 2px rgba(74, 103, 65, 0.2);
-    }
-    
-    .no-results {
-      text-align: center;
-      padding: 2rem;
-      font-style: italic;
-      color: #666;
-    }
-  </style>
+
 </head>
 
 <body>
@@ -52,16 +23,7 @@
     <!-- MAIN TITLE -->
     <h1 class="title">Our Pickles</h1>
 
-    <!-- SEARCH BAR -->
-    <div class="search-container">
-      <input 
-        type="text" 
-        id="search-bar" 
-        class="search-bar" 
-        placeholder="Search for pickles, olives, and more..."
-        aria-label="Search products"
-      >
-    </div>
+   
 
     <!-- DONATION / TIP SECTION (MOVED OUT OF GRID) -->
     <div class="donation-section" style="margin-top: 3rem; text-align:center;">
@@ -87,6 +49,17 @@
           <button class="button" id="add-tip-button">Add Tip to Cart</button>
         </div>
       </div>
+    </div>
+
+     <!-- SEARCH BAR -->
+    <div class="search-container">
+      <input 
+        type="text" 
+        id="search-bar" 
+        class="search-bar" 
+        placeholder="Search for pickles, olives, and more..."
+        aria-label="Search products"
+      >
     </div>
 
     <!-- PRODUCT GRID (CLEAN, FLAT, VALID) -->
