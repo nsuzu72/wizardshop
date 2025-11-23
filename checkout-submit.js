@@ -38,11 +38,20 @@ for (const name in cart) {
 let orderSummary = [];
 let totalQuantity = 0;
 
+console.log('Cart contents:', cart); // Debug log
+
 for (const name in cart) {
     const item = cart[name];
-    orderSummary.push(`${item.quantity}x ${name} - $${item.total.toFixed(2)}`);
-    totalQuantity += item.quantity;
+    console.log('Processing item:', name, item); // Debug log
+    
+    if (item && typeof item.quantity !== 'undefined' && typeof item.total !== 'undefined') {
+        orderSummary.push(`${item.quantity}x ${name} - $${item.total.toFixed(2)}`);
+        totalQuantity += item.quantity;
+    }
 }
+
+console.log('Order Summary:', orderSummary); // Debug log
+console.log('Total Quantity:', totalQuantity); // Debug log
 
 const formData = {
     name: document.getElementById('name').value,
@@ -51,12 +60,11 @@ const formData = {
     address: document.getElementById('address').value,
     timestamp: new Date().toLocaleString(),
     total: total,
-    order_summary: orderSummary.join('\n'), // Convert array to text
+    order_summary: orderSummary.join('\n'),
     total_quantity: totalQuantity
 };
-    
-console.log("FORM DATA SENT TO EMAILJS:", formData);
-alert(JSON.stringify(formData));
+
+console.log('Final formData:', formData); // Debug log
 
     // Replace these with your actual IDs from the EmailJS template setup!
     const serviceID = 'service_zhe8omo'; 
