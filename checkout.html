@@ -86,6 +86,35 @@
                 <p class="product-price">**PayPal: organizer@email.com**</p>
             </div>
 
+            <script>
+  // Phone formatting (simple US phone formatter)
+  const phoneInput = document.getElementById('phone');
+  if (phoneInput) {
+    phoneInput.addEventListener('input', function (e) {
+      let value = e.target.value.replace(/\D/g, '').slice(0,10);
+      if (value.length <= 3) e.target.value = value;
+      else if (value.length <= 6) e.target.value = `(${value.slice(0,3)}) ${value.slice(3)}`;
+      else e.target.value = `(${value.slice(0,3)}) ${value.slice(3,6)}-${value.slice(6)}`;
+    });
+  }
+
+  // OPTIONAL: Google Places Autocomplete for Address input (requires an API key)
+  // If you want it, uncomment the script include below and replace YOUR_API_KEY.
+  // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initAutocomplete" async defer></script>
+  function initAutocomplete() {
+    const addr = document.getElementById('address');
+    if (!addr) return;
+    const autocomplete = new google.maps.places.Autocomplete(addr, { types: ['address'] });
+    autocomplete.setFields(['formatted_address']);
+    autocomplete.addListener('place_changed', () => {
+      const place = autocomplete.getPlace();
+      if (place && place.formatted_address) {
+        addr.value = place.formatted_address;
+      }
+    });
+  }
+</script>
+
             <button type="submit" class="button" style="width: 100%; font-size: 1.5rem; margin-bottom: 1rem;">
                 Submit Order & Get Payment Details
             </button>
