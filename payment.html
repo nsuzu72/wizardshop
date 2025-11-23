@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wizards Swim - Payment Instructions</title>
+  <link rel="icon" type="image/png" href="https://i.ibb.co/3Yj1MF6d/OURFAVICON.png">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .payment-container { max-width: 900px; margin: 2rem auto; padding: 1.5rem; border: 2px solid var(--primary); border-radius: 12px; }
+    .logo-row { display:flex; align-items:center; gap:1rem; margin-bottom:1rem; }
+    .logo-row img { width:64px; height:64px; border-radius:8px; }
+    #map-frame { width:100%; height:300px; border:0; margin-top: 1rem; }
+    .order-lines { white-space: pre-wrap; background: #f8f8f8; padding: 1rem; border-radius: 8px; margin-top: 1rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html">Products</a>
+      <a href="cart.html" id="cart-link">View Cart</a>
+    </nav>
+  </header>
+
+  <div class="container payment-container">
+    <div class="logo-row">
+      <img src="https://i.ibb.co/3Yj1MF6d/OURFAVICON.png" alt="Wizards Swim Logo" />
+      <div>
+        <h1 class="title" style="margin:0;">Thank you! Order received</h1>
+        <p style="margin:0.25rem 0 0 0;">Follow the instructions below to complete payment.</p>
+      </div>
+    </div>
+
+    <h2>Order Summary</h2>
+    <div id="order-summary" class="order-lines">Loading...</div>
+
+    <h2 style="margin-top:1.5rem;">Payment Instructions</h2>
+    <p>
+      To complete your order, please send the Grand Total to one of these accounts:
+    </p>
+    <ul>
+      <li>Venmo: <a href="https://venmo.com/u/Emily-Brown-725" target="_blank" rel="noopener">Emily-Brown-725</a></li>
+      <li>PayPal: organizer@email.com</li>
+    </ul>
+
+    <p style="font-weight:bold;">After you pay, please take a screenshot of your payment and email it to the organizer address or reply to your confirmation email.</p>
+
+    <div id="address-box">
+      <h3>Shipping Address</h3>
+      <div id="shipping-address">Loading...</div>
+
+      <iframe id="map-frame" src="" loading="lazy"></iframe>
+    </div>
+
+    <div style="margin-top:1.5rem; text-align:center;">
+      <a href="index.html" class="button">Back to Shop</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>Thank you for supporting the Wizards Swim Team!</p>
+  </footer>
+
+  <script>
+    // Read the last_order from localStorage and render it
+    (function () {
+      const raw = localStorage.getItem('last_order');
+      if (!raw) {
+        document.getElementById('order-summary').textContent = 'No order information found. If you completed an order but see nothing here, please contact the organizer.';
+        return;
+      }
+
+      let order = {};
+      try { order = JSON.parse(raw); } catch (e) { console.error('parse error', e); }
+
+      // Render order summary
+      const orderSummaryLines = [];
+      orderSummaryLines.push(`Name: ${order.name || ''}`);
+      orderSummaryLines.push(`Email: ${order.email || ''}`);
+      orderSummaryLines.push(`Phone: ${order.phone || ''}`);
+      orderSummaryLines.push(`Total: $${order.total || '0.00'}`);
+      orderSummaryLines.push('');
+      orderSummaryLines.push('Items:');
+      if (order.order_summary && order.order_summary.length) {
+        orderSummaryLines.push(order.order_summary);
+      } else {
+        orderSummaryLines.push('(No detailed items captured)');
+      }
+
+      document.getElementById('order-summary').textContent = orderSummaryLines.join('\\n');
+
+      // Shipping address block + google maps embed via query (no API key needed for basic embed)
+      const address = order.address || '';
+      document.getElementById('shipping-address').textContent = address;
+      const mapFrame = document.getElementById('map-frame');
+      if (address) {
+        const q = encodeURIComponent(address);
+        mapFrame.src = `https://www.google.com/maps?q=${q}&output=embed`;
+      } else {
+        mapFrame.style.display = 'none';
+      }
+
+      // Optionally clear last_order if you want one-time view:
+      // localStorage.removeItem('last_order');
+    })();
+  </script>
+</body>
+</html>
